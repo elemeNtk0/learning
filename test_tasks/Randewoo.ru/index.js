@@ -13,17 +13,29 @@
 // console.log(doSmth(18));
 
 // solution Ex3/
+// const a = {
+//   field: 10,
+// };
+
+// function doSmth(a) {
+//   for (let objName in a) {
+//     if (a.hasOwnProperty(objName) && typeof a[objName] === 'number') {
+//       a[objName] = a[objName] * 2;
+//     }
+//   }
+// }
+// doSmth(a);
+// console.log(a);
+
 const a = {
-  field: 10,
+  b: 12,
 };
 
-function doSmth(a) {
-  for (let objName in a) {
-    if (a.hasOwnProperty(objName) && typeof a[objName] === 'number') {
-      a[objName] = a[objName] * 2;
-    }
-  }
+function doSmth(value) {
+  value = {};
+  value.b = 34;
 }
+
 doSmth(a);
 
-console.log(a);
+console.log(a); // => { b: 12 }
