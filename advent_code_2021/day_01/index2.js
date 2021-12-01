@@ -107,12 +107,31 @@ const arr = [
 // arr.split('\n').map(line => line.split(''));
 
 let result = 0;
+let sum = 0;
+let currentSum = 0;
+
+sum = arr[0] + arr[1] + arr[2];
+
+console.log('first sum: ' + sum);
 
 for (let i = 1; i < arr.length; i++) {
-  if (arr[i] > arr[i-1]) {
-    result++;
+  // console.log(arr[i + 1]);
+
+  if (i + 2 >= arr.length) {
+    console.log('i+2 выходит за границу массива  → Это выход, братан!');
+    break;
   }
+
+  currentSum = arr[i] + arr[i + 1] + arr[i + 2];
+  console.log('i=' + i + ' currentSum=' + currentSum + '  Sum=' + sum + ' res=' + result);
+  
+  if (currentSum > sum) {
+    sum = currentSum;
+    result++;
+    // console.log("Теперь sum: " + sum + " | a result: " + result);
+    // console.log('currentSum: ' + currentSum);
+  }
+  
 }
 
 console.log(result);
-
