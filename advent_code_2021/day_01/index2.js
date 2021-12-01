@@ -104,34 +104,31 @@ const arr = [
   5746, 5756, 5769, 5770, 5757, 5748, 5766, 5770,
 ];
 
+let arr2 = [199, 200, 208, 210, 200, 207, 240, 269, 260, 263];
+
 // arr.split('\n').map(line => line.split(''));
 
 let result = 0;
-let sum = 0;
+let sum = arr[0] + arr[1] + arr[2];
 let currentSum = 0;
-
-sum = arr[0] + arr[1] + arr[2];
 
 console.log('first sum: ' + sum);
 
 for (let i = 1; i < arr.length; i++) {
-  // console.log(arr[i + 1]);
 
   if (i + 2 >= arr.length) {
-    console.log('i+2 выходит за границу массива  → Это выход, братан!');
+    // console.log('i+2 выходит за границу массива  → Это выход, братан!');
     break;
   }
 
   currentSum = arr[i] + arr[i + 1] + arr[i + 2];
-  console.log('i=' + i + ' currentSum=' + currentSum + '  Sum=' + sum + ' res=' + result);
+  console.log('i=' + i + ' currentSum=' + currentSum + '  Sum=' + sum);
   
   if (currentSum > sum) {
-    sum = currentSum;
     result++;
-    // console.log("Теперь sum: " + sum + " | a result: " + result);
-    // console.log('currentSum: ' + currentSum);
   }
-  
+  sum = currentSum;
+  console.log('result= ' + result);
 }
 
 console.log(result);
