@@ -1063,26 +1063,35 @@ epsilon = epsilon.split('');
 //   }
 // }
 
-function FindOxygenGenerator(OGArray, step, item) {
-  console.log('step=' + step + ' item=' + item);
-
+function FindOxygenGenerator(OGArray, step) {
   for (let i = 0; i < OGArray.length; i++) {
-    if (OGArray[i][step] !== item) {
+    if (OGArray[i][step] !== gamma[step]) {
       OGArray.splice(OGArray.indexOf(OGArray[i]), 1);
     }
+
+    // тут пизда
+    
+    console.log(OGArray);
     // } else if (OGArray.includes(newArr[i])) OGArray.splice(newArr[i], 1);
   }
-  console.log(OGArray);
-
+  
+  // FindOxygenGenerator(OGArray);
   return OGArray;
 }
 
 OG = newArr;
 
-for (let h = 0; h < gamma.length; h++) {
-  FindOxygenGenerator(OG, h, gamma[h]);
-  console.log('OG [] ' + OG);
+let q = 0;
+
+while (q < gamma.length) {
+  FindOxygenGenerator(OG, q);
+
+  console.log(`OG step ${q} =>` + OG);
+  q++;
 }
+
+console.log(`[last item array]: ${OG[0]} | OG= ${parseInt(OG[0].join(''), 2)}`);
+// console.log(parseInt(10110, 2));
 
 // console.log(OG);
 
