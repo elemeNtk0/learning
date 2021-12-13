@@ -1,4 +1,4 @@
-const arr2 = [
+const arr = [
   '000011001000',
   '001111100100',
   '110101011111',
@@ -1001,7 +1001,7 @@ const arr2 = [
   '010100010000',
 ];
 
-const arr = [
+const arr2 = [
   '00100',
   '11110',
   '10110',
@@ -1016,85 +1016,70 @@ const arr = [
   '01010',
 ];
 
-let newArr = arr.map((item) => item.split(''));
+let OG = arr.map((item) => item.split(''));
+let CO2 = arr.map((item) => item.split(''));
 
-let OG = [],
-  CO2 = [];
+// console.log(newArr);
 
-console.log(newArr);
+result = 0;
 
-let zeroCount = 0,
-  oneCount = 0,
-  result = 0,
-  gamma = '';
-epsilon = '';
+// console.log(`gamma= ${gamma}   epsilon= ${epsilon}`);
+function FidnOGandCO2(superArr, step, word) {
+  let gamma;
 
-let rows = arr.length;
-let columns = arr[0].length;
+  for (let i = 0; i < superArr.length; i++) {
+    let zeroCount = 0,
+      oneCount = 0;
 
-for (let i = 0; i < columns; i++) {
-  zeroCount = 0;
-  oneCount = 0;
+    if (superArr.length === 1) return superArr;
 
-  for (let j = 0; j < rows; j++) {
-    newArr[j][i] === '1' ? oneCount++ : zeroCount++;
-  }
-
-  oneCount > zeroCount ? ((gamma += '1'), (epsilon += '0')) : ((gamma += '0'), (epsilon += '1'));
-}
-gamma = gamma.split('');
-epsilon = epsilon.split('');
-
-// console.log('zeroCount=' + zeroCount + ' onceCount=' + oneCount);
-
-// function ishemOG(ogArray, step) {
-//   for (let g = 0; g < columns; g++) {
-//     // console.log('gamma[g]=' + gamma[g]);
-
-//     for (let k = 0; k < rows; k++) {
-//       if (newArr[k].indexOf(gamma[g], g) === g) {
-//         ogArray.push(newArr[k]);
-//         console.log('добавили= ' + newArr[k]);
-//       } else {
-//         console.log('удалили= ' + newArr[k]);
-//         ogArray.shift(k, 1);
-//       }
-//     }
-//   }
-// }
-
-function FindOxygenGenerator(OGArray, step) {
-  for (let i = 0; i < OGArray.length; i++) {
-    if (OGArray[i][step] !== gamma[step]) {
-      OGArray.splice(OGArray.indexOf(OGArray[i]), 1);
+    for (let s = 0; s < superArr.length; s++) {
+      superArr[s][step] === '1' ? oneCount++ : zeroCount++;
     }
 
-    // тут пизда
-    
-    console.log(OGArray);
-    // } else if (OGArray.includes(newArr[i])) OGArray.splice(newArr[i], 1);
+    if (word === 'gamma') {
+      oneCount >= zeroCount ? (gamma = '1') : (gamma = '0');
+    }
+    if (word === 'epsilon') {
+      zeroCount <= oneCount ? (gamma = '0') : (gamma = '1');
+    }
+
+    // console.log(`gamma=${gamma} — step=${step}`);
+
+    if (superArr[i][step] !== gamma) {
+      console.log(`удаляем: superArr[${i}]: ${superArr[i]}`);
+      superArr.splice(superArr.indexOf(superArr[i]), 1);
+      i--;
+      console.log('superArr after remove row=');
+      console.log(superArr);
+      continue;
+    }
   }
-  
-  // FindOxygenGenerator(OGArray);
-  return OGArray;
+
+  return superArr;
 }
 
-OG = newArr;
-
-let q = 0;
-
-while (q < gamma.length) {
-  FindOxygenGenerator(OG, q);
-
-  console.log(`OG step ${q} =>` + OG);
-  q++;
+// console.log('gamma.length = ' + gamma.length);
+for (let step = 0; step < arr[0].length; step++) {
+  FidnOGandCO2(OG, step, 'gamma');
 }
+
+for (let step2 = 0; step2 < arr[0].length; step2++) {
+  FidnOGandCO2(CO2, step2, 'epsilon');
+}
+
+// for (let step = 0; step < epsilon.length; step++) {
+//   FindOxygenGenerator(CO2, epsilon, step);
+// }
+
+// FindOxygenGenerator(CO2, epsilon);
+
+// console.log(`OG step ${q} =>` + OG);
 
 console.log(`[last item array]: ${OG[0]} | OG= ${parseInt(OG[0].join(''), 2)}`);
-// console.log(parseInt(10110, 2));
+console.log(`[last item array]: ${CO2[0]} | CO2= ${parseInt(CO2[0].join(''), 2)}`);
 
 // console.log(OG);
 
-// result = parseInt(gamma, 2) * parseInt(epsilon, 2);
-
+console.log(parseInt(OG[0].join(''), 2) * parseInt(CO2[0].join(''), 2));
 // console.log(result);
